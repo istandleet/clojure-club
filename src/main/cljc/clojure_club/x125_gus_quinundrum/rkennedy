@@ -1,0 +1,16 @@
+(ns clojure-club.x125-gus-quinundrum.rkennedy)
+
+; The assertion fails, as:
+; > (str '(identity"test"))
+; "(identity \"test\")"
+
+; The logic is the same as the haskell quine:
+; ((++)<*>show)"((++)<*>show)"
+; which translates to 
+; (\x->x++show x)"(\\x->x++show x)"
+
+(assert 
+  (= (str '((fn [x] (str "(" x (pr-str x) ")"))"(fn [x] (str \"(\" x (pr-str x) \")\"))")) 
+           ((fn [x] (str "(" x (pr-str x) ")"))"(fn [x] (str \"(\" x (pr-str x) \")\"))")
+  )
+)
